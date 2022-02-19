@@ -1,0 +1,18 @@
+/joystick_node:
+  ros__parameters:
+    adc_i2c_address: '0x48'
+    adc_twist_channel: 2
+    adc_x_channel: 3
+    adc_y_channel: 1
+    angular_only: 30
+    angular_polarity: -1
+    angular_scaling: 0.01
+    cycle_timer: 0.1
+    cycles_publish: 10
+    granularity: 5
+    linear_polarity: -1
+    linear_scaling: 0.02
+    ros_topic: cmd_vel
+    use_sim_time: false
+    zero_range_max: 5
+    zero_range_min: -5
