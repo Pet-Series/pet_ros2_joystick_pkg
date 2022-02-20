@@ -1,8 +1,26 @@
 ## Test of embedded mermaid diagrams in GitHub README.md
+* https://github.com/mermaid-js/mermaid
+* https://mermaid-js.github.io/mermaid/#/README
+* https://mermaid-js.github.io/mermaid/#/Tutorials
+* https://www.kubernetes.dev/blog/2021/12/01/improve-your-documentation-with-mermaid.js-diagrams/
+* https://mermaid-js.github.io/mermaid-live-editor/
+* https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/
+
+```mermaid
+stateDiagram-v2
+    [*] --> Init
+    Init --> Read_A/D
+    Read_A/D --> Joystick
+    Joystick --> Read_A/D
+    Read_A/D --> Transform
+    Transform--> Map
+    Map      --> Twistify
+    Twistify --> Publish
+    Publish  --> Read_A/D
+```
 
 ```mermaid
 flowchart TD
-
     Init([Init Param]) --> Read_A/D
     Joystick  -.-> |0-3.3V|Read_A/D
     Read_A/D  -.-> Joystick
