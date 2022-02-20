@@ -7,6 +7,17 @@ Remotely control your robot via cmd_vel topic \
 * `Linear`  = `Y-axis` = Pull stick Up/Down
 * `Twist`   = `Z-axis` = Turn/Twist stick  (Not used right now)
 
+<table>
+    <tr>
+      <td>
+        <img src="doc/pet_joystick_fake3D.png" height="350px">
+      </td>
+      <td>
+        <img src="doc/pet_joystick_stickZone.png" height="350px">
+      </td>
+    </tr>
+  </table>
+
 ## ROS2 Package/Module Behaviour
 1. Once: Read/Set all the parameters
 1. Repeatedly: Read analog joystick via ADC
@@ -31,6 +42,16 @@ flowchart TD
 * A/D converter: KY-053 Analog Digital Converter (ADS1115, 16-bit) via default I2C adr.=0x48
 * Joystick: 3x analog 10K resistors. X-, Y- and Twist-axis.
 * Single Board Computer(SBC): Raspberry Pi 4
+<table>
+    <tr>
+      <td>
+        <img src="doc/pet_joystick_prototypePhoto1.jpg" height="350px">
+      </td>
+      <td>
+        .
+      </td>
+    </tr>
+  </table>
 
 ## Prerequisite: Software
 * Robot Operating System 2, ROS2 (Version Galathic)
@@ -68,14 +89,14 @@ Dowload ROS2 package by using 'git clone'
 ~$ cd ~/ws_ros2/src
 ~/ws_ros2/src$ git clone https://github.com/Pet-Series/pet_joystick.git
 ~/ws_ros2/src$ cd ..
-~/ws_ros2$ colcon build
+~/ws_ros2$ colcon build --symlink-install
 ~/ws_ros2$ source /opt/ros/galactic/setup.bash
 ~/ws_ros2$ source ./install/setup.bash
 </pre></code></ul>
 
 ## ROS2 Launch sequence
 `Ubuntu Shell`
-<ul><pre><code>~/ws_ros2$ ros2 run pet_mk_viii_joystick joystick_node 
+<ul><pre><code>~/ws_ros2$ ros2 run pet_joystick pet_joystick_node 
 </pre></code></ul>
 
 ## ROS2 Topics used by this package
