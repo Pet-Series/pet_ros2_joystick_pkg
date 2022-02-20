@@ -102,7 +102,9 @@ Dowload ROS2 package by using 'git clone'
 ## ROS2 Topics used by this package
 `Ubuntu Shell`
 <ul><pre><code>~/ws_ros2$ ros2 topic list
-  /cmd_vel
+  /raw/joystick
+  /twist/cmd_vel
+  /twist_stamped/cmd_vel
 </pre></code></ul>  
 
 ## ROS2 Parameters used by this package
@@ -117,18 +119,21 @@ Dowload ROS2 package by using 'git clone'
 /joystick_node:
   ros__parameters:
     adc_i2c_address: '0x48'
-    adc_twist_channel: 2
     adc_x_channel: 3
     adc_y_channel: 1
+    adc_z_channel: 2
     angular_only: 30
-    angular_polarity: -1
     angular_scaling: 0.01
     cycle_timer: 0.1
     cycles_publish: 10
     granularity: 5
-    linear_polarity: -1
     linear_scaling: 0.02
-    ros_topic: cmd_vel
+    ros_topic_raw: raw/joystick
+    ros_topic_twist: twist/cmd_vel
+    ros_topic_twist_stamped: twist_stamped/cmd_vel
+    x_polarity: -1
+    y_polarity: -1
+    z_polarity: -1
     zero_range_max: 5
     zero_range_min: -5
 ```
