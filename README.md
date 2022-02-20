@@ -17,12 +17,12 @@ Remotely control your robot via cmd_vel topic \
 
 ```mermaid
 flowchart TD
-    Init --> Read
-    Read -->      |0-32000|    Transform
-    Transform --> |-100..+100| Map
-    Map -->       |-100..+100| Twist
-    Twist -->     |m/s|        Publish
-    Publish -->  |Loop|        Read
+    Init      --> Read
+    Read      --> |0-32000|Transform
+    Transform --> |-100..+100|Map
+    Map       --> |-100..+100|Twist
+    Twist     --> |m/s|Publish
+    Publish   --> |Loop|Read
 ```
 
 ## Prerequisite: Hardware
