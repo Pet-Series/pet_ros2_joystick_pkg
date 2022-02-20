@@ -16,13 +16,13 @@ Remotely control your robot via cmd_vel topic \
 1. Repeatedly: Publish ros-topic
 
 ```mermaid
-graph TD;
-    Init-->Read;
-    Read-->Transform 100%;
-    Transform 100%-->Map;
-    Map-->Transform Twist;
-    Transform Twist-->Publish;
-    Publish-->Read
+flowchart TD
+    Init --> Read
+    Read -->      |0-32000|    Transform
+    Transform --> |-100..+100| Map
+    Map -->       |-100..+100| Twist
+    Twist -->     |m/s|        Publish
+    Publish -->  |Loop|        Read
 ```
 
 ## Prerequisite: Hardware
