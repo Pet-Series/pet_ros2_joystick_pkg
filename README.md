@@ -43,15 +43,15 @@ flowchart TD
 * Joystick: 3x analog 10K resistors. X-, Y- and Twist-axis.
 * Single Board Computer(SBC): Raspberry Pi 4
 <table>
-    <tr>
-      <td>
-        <img src="doc/pet_joystick_prototypePhoto1.jpg" height="350px">
-      </td>
-      <td>
-        .
-      </td>
-    </tr>
-  </table>
+  <tr>
+    <td>
+      <img src="doc/pet_joystick_prototypePhoto1.jpg" height="350px">
+    </td>
+    <td>
+      .
+    </td>
+  </tr>
+</table>
 
 ## Prerequisite: Software
 * Robot Operating System 2, ROS2 (Version Galathic)
@@ -60,7 +60,8 @@ flowchart TD
 ## Prerequisite: I2C-interface Raspberry Pi 4 / Ubuntu
 
 `Ubuntu Shell`
-<ul><pre><code>~$ sudo apt install i2c-tools
+```
+~$ sudo apt install i2c-tools
 ~$ sudo apt install python3-pip
 ~$ sudo pip3 install smbus2
 ~$ sudo pip3 install adafruit-ads1x15
@@ -75,7 +76,7 @@ flowchart TD
    60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
    70: -- -- -- -- -- -- -- --    
 $ sudo chmod a+rw /dev/i2c-1
-</pre></code></ul>
+```
 
 ## Dowload and install this packages
 Create a ROS2 workspace (in my exampel '~/ws_ros2/') \
@@ -85,34 +86,47 @@ Dowload ROS2 package by using 'git clone'
 </blockquote></ul>
 
 `Ubuntu Shell`
-<ul><pre><code>~$ mkdir -p ~/ws_ros2/src
+```
+~$ mkdir -p ~/ws_ros2/src
 ~$ cd ~/ws_ros2/src
 ~/ws_ros2/src$ git clone https://github.com/Pet-Series/pet_joystick.git
 ~/ws_ros2/src$ cd ..
 ~/ws_ros2$ colcon build --symlink-install
 ~/ws_ros2$ source /opt/ros/galactic/setup.bash
 ~/ws_ros2$ source ./install/setup.bash
-</pre></code></ul>
+```
 
 ## ROS2 Launch sequence
 `Ubuntu Shell`
-<ul><pre><code>~/ws_ros2$ ros2 run pet_joystick pet_joystick_node 
-</pre></code></ul>
+```
+~/ws_ros2$ ros2 run pet_joystick pet_joystick_node
+  [INFO] [1645471061.181057770] [joystick_node]: joystick_node has started
+  [INFO] [1645471061.183638877] [joystick_node]: - A/D: 0x48, X-chn: 3, Y-chn: 1, Twist-chn: 2
+  [INFO] [1645471061.186369983] [joystick_node]: - A/D sampling: 10.0Hz, Topic: twist/cmd_vel
+```
 
 ## ROS2 Topics used by this package
+The <code>pet_joystick_node</code> parallel publishes three variants of topics messages.
+1. <code>/raw/joystick</code> using msg.type Joy from sensor_msgs.msg
+2. <code>/twist/cmd_vel</code> using msg.type Twist from geometry_msgs.msg
+3. <code>/twist_stamped/cmd_vel</code> using msg.type TwistStamped from geometry_msgs.msg
+
 `Ubuntu Shell`
-<ul><pre><code>~/ws_ros2$ ros2 topic list
+```
+~/ws_ros2$ ros2 topic list
   /raw/joystick
   /twist/cmd_vel
   /twist_stamped/cmd_vel
-</pre></code></ul>  
+```
 
 ## ROS2 Parameters used by this package
+Save a "dump" of all the parameters that <code>pet_joystick_node</code> uses.
 `Ubuntu Shell`
-<ul><pre><code>~/ws_ros2$ ros2 param dump /joystick_node
+```
+~/ws_ros2$ ros2 param dump /joystick_node
   Saving to:  ./joystick_node.yaml
-</pre></code></ul>
-
+```
+In the following list you can see all the parameters that <code>pet_joystick_node</code> uses. And their default values.<br>
 `./joystick_node.yaml`
 
  ```Yaml
@@ -138,3 +152,37 @@ Dowload ROS2 package by using 'git clone'
     zero_range_min: -5
 ```
 </ul>
+
+## ROS2 Test pet_joystick_node using TurtleSim
+Objective is to control the simulated turtle on screen by using <code>pet_joystick_node</code>.
+<ul><blockquote>🤔Most probably have you already the TurtleSim installed as a part of ROS2.<br>
+                ...I will not cover that here!
+</blockquote></ul>
+
+Initiate ROS2 & launch TurtleSim<br>
+<code>Ubuntu Shell #1</code>
+```
+~/ws_ros2$ source /opt/ros/galactic/setup.bash
+~/ws_ros2$ ros2 run turtlesim turtlesim_node
+```
+Show/list used ros-topics that TurtleSim using and look for the "cmd_vel"<br>
+<code>Ubuntu Shell #2</code>
+```
+~/ws_ros2$ ros2 topic list
+	/turtle1/cmd_vel   <- This is the topic name that TurtleSim using.
+	/turtle1/color_sensor
+	/turtle1/pose
+~/ws_ros2$
+``` 
+
+Set the output ros-topic name for the <code>pet_joystick_node</code> to match the topic-name that TurtleSim using = <code>/turtle1/cmd_vel</code><br>
+One way to do this is set the parameter <code>-p ros_topic_twist:=turtle1/cmd_vel</code> when launching <code>pet_joystick_node</code><br>
+<code>Ubuntu Shell #3</code>
+```
+~/ws_ros2$ ros2 run pet_joystick pet_joystick_node --ros-args -p ros_topic_twist:=turtle1/cmd_vel
+  [INFO] [1645466678.951719930] [joystick_node]: joystick_node has started
+  [INFO] [1645466678.954457277] [joystick_node]: - A/D: 0x48, X-chn: 3, Y-chn: 1, Twist-chn: 2
+  [INFO] [1645466678.957577325] [joystick_node]: - A/D sampling: 10.0Hz, Topic: turtle1/cmd_vel
+``` 
+
+  <img src="doc/TurtleSimExample.png" height="300px">

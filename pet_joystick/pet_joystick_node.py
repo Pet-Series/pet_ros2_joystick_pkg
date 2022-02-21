@@ -148,7 +148,7 @@ class JoystickNode(Node):
 
             # Some basic information on the console
             self.get_logger().info("joystick_node has started")
-            self.get_logger().info("- A/D: " + self.ADC_I2C_ADDRESS + ", X-chn: " + str(self.ADC_X_CHANNEL)+ ", Y-chn: " + str(self.ADC_Y_CHANNEL)+ ", Twist-chn: " + str(self.ADC_Z_CHANNEL) )
+            self.get_logger().info("- A/D: " + self.ADC_I2C_ADDRESS + ", X-chn: " + str(self.ADC_X_CHANNEL)+ ", Y-chn: " + str(self.ADC_Y_CHANNEL)+ ", Z-chn: " + str(self.ADC_Z_CHANNEL) )
             self.get_logger().info("- A/D sampling: " + str(100 *self.CYCLE_TIMER) +"Hz, Topic: " + self.ROS_TOPIC_TWIST )
         except:
             # Note: a permission error can be fixed with a "sudo chmod a+rw /dev/i2c-1"
