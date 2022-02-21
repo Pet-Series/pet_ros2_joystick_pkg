@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# ament_cmake_flake8 : a style checker for Python files
+# Checks the code syntax and style of Python source files using flake8. 
+# Files with the following extensions are being considered: .py
+
 from ament_flake8.main import main_with_errors
 import pytest
 
