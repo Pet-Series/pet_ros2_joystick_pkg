@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Checks the code style of Python source files using pep257. 
+# Files with the following extensions are being considered: .py.
+
 from ament_pep257.main import main
 import pytest
 
