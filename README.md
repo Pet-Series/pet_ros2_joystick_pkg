@@ -152,12 +152,17 @@ In the following list you can see all the parameters that <code>pet_joystick_nod
     zero_range_min: -5
 ```
 </ul>
+<br>
+
+---
 
 ## ROS2 Test pet_joystick_node using TurtleSim
 Objective is to control the simulated turtle on screen by using <code>pet_joystick_node</code>.
 <ul><blockquote>🤔Most probably have you already the TurtleSim installed as a part of ROS2.<br>
                 ...I will not cover that here!
 </blockquote></ul>
+
+<img src="doc/ROS2_Joystick-ROS2_Turtle.png" height="300px">
 
 Initiate ROS2 & launch TurtleSim<br>
 <code>Ubuntu Shell #1</code>
@@ -184,5 +189,12 @@ One way to do this is set the parameter <code>-p ros_topic_twist:=turtle1/cmd_ve
   [INFO] [1645466678.954457277] [joystick_node]: - A/D: 0x48, X-chn: 3, Y-chn: 1, Twist-chn: 2
   [INFO] [1645466678.957577325] [joystick_node]: - A/D sampling: 10.0Hz, Topic: turtle1/cmd_vel
 ``` 
+<ul><img src="doc/TurtleSimExample.png" height="300px"></ul>
 
-  <img src="doc/TurtleSimExample.png" height="300px">
+<br>
+
+---
+
+## ROS2 Test pet_joystick_node via ROS1_Bridge to TurtleSim on an other PC running ROS1
+If the target system is based on ROS1 (some legasy robot...). Then this is how you bridge the ROS2 based Joystick_node over to a ROS1 based target system (in this example running TurtleSim under ROS1).
+  <img src="doc/ROS2_Joystick-Bridge-ROS1_Turtle.png" height="300px">
