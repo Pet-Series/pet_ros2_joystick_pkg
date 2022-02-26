@@ -104,7 +104,7 @@ class JoystickNode(Node):
         self.declare_parameter( 'x_polarity', -1, ParameterDescriptor(description='Joystick polarity in Angular(X=Left/Right) direction [default=-1]') )
         self.X_POLARITY = self.get_parameter( 'x_polarity' ).value
 
-        self.declare_parameter( 'y_polarity', -1, ParameterDescriptor(description='Joystick polarity in Linear(Y=Up/Down) direction[default=-1]') )
+        self.declare_parameter( 'y_polarity', 1, ParameterDescriptor(description='Joystick polarity in Linear(Y=Up/Down) direction[default=1]') )
         self.Y_POLARITY = self.get_parameter( 'y_polarity' ).value
         
         self.declare_parameter( 'z_polarity', -1, ParameterDescriptor(description='Joystick polarity in Linear(Y=Up/Down) direction[default=-1]') )
