@@ -41,7 +41,7 @@ flowchart TD
 ## Prerequisite: Hardware
 * Single Board Computer(SBC): Raspberry Pi 3/4
 * A/D converter: KY-053 Analog Digital Converter (ADS1115, 16-bit) via default I2C adr.=<code>0x48</code>
-<ul><blockquote>🌐Google tips to find/order A/D-converter from eBay/AliExpress/Wish/Amazon/...  <br>
+<ul><blockquote>🌐Google tips to find/order A/D-converter from eBay/AliExpress/Wish/Amazon/...  <br></ul>
 1) "KY-053"<br>
 2) "ADS1115 breakout board"
 <table>
@@ -89,8 +89,8 @@ $ sudo chmod a+rw /dev/i2c-1
 ## Dowload and install this ROS2 packages
 Create a ROS2 workspace (in my exampel '~/ws_ros2/') \
 Dowload ROS2 package by using 'git clone'
-<ul><blockquote>🤔There is probably better tutorials how to do this...<br>
-                ...but here is how I made it.
+<ul><blockquote>🤔There is probably better tutorials how to do this...<br/>
+                ...but here is how I made it.<br/>
 </blockquote></ul>
 
 `Ubuntu Shell`
