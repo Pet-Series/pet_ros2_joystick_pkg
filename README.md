@@ -2,7 +2,7 @@
 
 Remotely control your robot via cmd_vel topic \
 **Input:** 3x axis analog joystick (X + Y + Z/Twist) \
-**Output:** micro-ROS node (ROS2) that publish topic /cmd_vel with msg.type twist_stamped
+**Output:** ROS node (ROS2) that publish topic /cmd_vel with msg.type twist_stamped
 * `Angular` = `X-axis` = Pull stick Left/Right
 * `Linear`  = `Y-axis` = Pull stick Up/Down
 * `Twist`   = `Z-axis` = Turn/Twist stick  (Not used right now)
@@ -124,11 +124,12 @@ The <code>pet_joystick_node</code> parallel publishes three variants of topics m
 ```
 <ul><img src="doc/rqt_node_graph-joystick_node.png" height="300px"></ul>
 <br>
+	
 ## ROS2 Parameters used by this package
 Save a "dump" of all the parameters that <code>pet_joystick_node</code> uses.
 `Ubuntu Shell`
 ```
-~/ws_ros2$ ros2 param dump /joystick_node
+~/ws_ros2/data$ ros2 param dump /joystick_node
   Saving to:  ./joystick_node.yaml
 ```
 In the following list you can see all the parameters that <code>pet_joystick_node</code> uses. And their default values.<br>
@@ -159,7 +160,7 @@ In the following list you can see all the parameters that <code>pet_joystick_nod
 </ul>
 <br>
 
-# Test the Jotstick node
+# Test the Joystick node
 
 ## ROS2 Test pet_joystick_node using TurtleSim (indivudal start)
 Objective is to control the simulated turtle on screen by using <code>pet_joystick_node</code>.
@@ -221,6 +222,6 @@ But this time we launch in one step, via a <code>.launch</code> file.
 <ul><img src="doc/rqt_node_graph-joystick_node+turtlesim_node(.launch_file).png" height="300px"></ul>
 <br>
 
-## ROS2 Test pet_joystick_node via ROS1_Bridge to TurtleSim on an other PC running ROS1
-If the target system is based on ROS1 (some legasy robot...). Then this is how you bridge the ROS2 based Joystick_node over to a ROS1 based target system (in this example running TurtleSim under ROS1).<br>
+## ROS2 Test pet_joystick_node via ROS1_Bridge to TurtleSim on another PC running ROS1
+If the target system is based on ROS1 (some legacy robot...). Then this is how you bridge the ROS2 based Joystick_node over to a ROS1 based target system (in this example running TurtleSim under ROS1).<br>
 <ul><img src="doc/ROS2_Joystick-Bridge-ROS1_Turtle.png" width="1100px"></ul>
