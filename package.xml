@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>pet_joystick</name>
+  <name>pet_ros2_joystick_pkg</name>
   <version>0.0.1</version>
-  <description>ROS2 Python Analog-Joystick controller</description>
+  <description>ROS2 Python Analog-Joystick controller for Raspberry Pi</description>
   <maintainer email="stefan.kull@gmail.com">seniorKullken</maintainer>
   <license>MIT</license>
 

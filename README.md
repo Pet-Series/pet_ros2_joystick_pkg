@@ -97,7 +97,7 @@ Dowload ROS2 package by using 'git clone'
 ```
 ~$ mkdir -p ~/ws_ros2/src
 ~$ cd ~/ws_ros2/src
-~/ws_ros2/src$ git clone https://github.com/Pet-Series/pet_joystick.git
+~/ws_ros2/src$ git clone https://github.com/Pet-Series/pet_ros2_joystick_pkg.git
 ~/ws_ros2/src$ cd ..
 ~/ws_ros2$ colcon build --symlink-install
 ~/ws_ros2$ source /opt/ros/galactic/setup.bash
@@ -107,7 +107,7 @@ Dowload ROS2 package by using 'git clone'
 ## ROS2 Launch sequence
 `Ubuntu Shell`
 ```
-~/ws_ros2$ ros2 run pet_joystick pet_joystick_node
+~/ws_ros2$ ros2 run pet_ros2_joystick_pkg pet_joystick_node
   [INFO] [1645471061.181057770] [joystick_node]: joystick_node has started
   [INFO] [1645471061.183638877] [joystick_node]: - A/D: 0x48, X-chn: 3, Y-chn: 1, Twist-chn: 2
   [INFO] [1645471061.186369983] [joystick_node]: - A/D sampling: 10.0Hz, Topic: twist/cmd_vel
@@ -192,7 +192,7 @@ Set the output ros-topic name for the <code>pet_joystick_node</code> to match th
 One way to do this is set the parameter <code>-p ros_topic_twist:=turtle1/cmd_vel</code> when launching <code>pet_joystick_node</code><br>
 <code>Ubuntu Shell #3</code>
 ```
-~/ws_ros2$ ros2 run pet_joystick pet_joystick_node --ros-args -p ros_topic_twist:=turtle1/cmd_vel
+~/ws_ros2$ ros2 run pet_ros2_joystick_pkg pet_joystick_node --ros-args -p ros_topic_twist:=turtle1/cmd_vel
   [INFO] [1645466678.951719930] [joystick_node]: joystick_node has started
   [INFO] [1645466678.954457277] [joystick_node]: - A/D: 0x48, X-chn: 3, Y-chn: 1, Twist-chn: 2
   [INFO] [1645466678.957577325] [joystick_node]: - A/D sampling: 10.0Hz, Topic: turtle1/cmd_vel
