@@ -15,7 +15,7 @@ setup(
     zip_safe=True,
     maintainer='seniorKullken',
     maintainer_email='stefan.kull@gmail.com',
-    description='My first ROS2 package...',
+    description='ROS2 Python Joystick controller',
     license='MIT',
     tests_require=['pytest'],
     entry_points={
