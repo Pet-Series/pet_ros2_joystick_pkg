@@ -39,9 +39,16 @@ flowchart TD
 ```
 
 ## Prerequisite: Hardware
-* A/D converter: KY-053 Analog Digital Converter (ADS1115, 16-bit) via default I2C adr.=0x48
+* Single Board Computer(SBC): Raspberry Pi 3/4
+* A/D converter: KY-053 Analog Digital Converter (ADS1115, 16-bit) via default I2C adr.=<code>0x48</code>
+<ul><blockquote>🌐Google tips to find/order A/D-converter from eBay/AliExpress/Wish/Amazon/...  <br>
+1) "KY-053"<br>
+2) "ADS1115 breakout board"
+<table>
 * Joystick: 3x analog 10K resistors. X-, Y- and Twist-axis.
-* Single Board Computer(SBC): Raspberry Pi 4
+<ul><blockquote>🌐Google tips to find/order Joystick from eBay/AliExpress/Wish/Amazon/...  <br>
+1) "3-axis analog joy stick"<br>
+2) "XYZ analog joystick"
 <table>
   <tr>
     <td>
@@ -54,11 +61,12 @@ flowchart TD
 </table>
 
 ## Prerequisite: Software
+* Ubuntu 20.04 (64bit) or newer
 * Robot Operating System 2, ROS2 (Version Galathic)
   <blockquote>...do the ROS2-installation stuff...</blockquote>
 
 ## Prerequisite: I2C-interface Raspberry Pi 4 / Ubuntu
-
+Prepared by adding additional, i2c communication, Linux-software-packages 
 `Ubuntu Shell`
 ```
 ~$ sudo apt install i2c-tools
@@ -78,7 +86,7 @@ flowchart TD
 $ sudo chmod a+rw /dev/i2c-1
 ```
 
-## Dowload and install this packages
+## Dowload and install this ROS2 packages
 Create a ROS2 workspace (in my exampel '~/ws_ros2/') \
 Dowload ROS2 package by using 'git clone'
 <ul><blockquote>🤔There is probably better tutorials how to do this...<br>
@@ -146,7 +154,7 @@ In the following list you can see all the parameters that <code>pet_joystick_nod
     ros_topic_twist: twist/cmd_vel
     ros_topic_twist_stamped: twist_stamped/cmd_vel
     x_polarity: -1
-    y_polarity: -1
+    y_polarity: 1
     z_polarity: -1
     zero_range_max: 5
     zero_range_min: -5
@@ -162,7 +170,7 @@ Objective is to control the simulated turtle on screen by using <code>pet_joysti
                 ...I will not cover that here!
 </blockquote></ul>
 
-<img src="doc/ROS2_Joystick-ROS2_Turtle.png" height="300px">
+<img src="doc/ROS2_Joystick-ROS2_Turtle.png" width="1100px">
 
 Initiate ROS2 & launch TurtleSim<br>
 <code>Ubuntu Shell #1</code>
@@ -197,4 +205,4 @@ One way to do this is set the parameter <code>-p ros_topic_twist:=turtle1/cmd_ve
 
 ## ROS2 Test pet_joystick_node via ROS1_Bridge to TurtleSim on an other PC running ROS1
 If the target system is based on ROS1 (some legasy robot...). Then this is how you bridge the ROS2 based Joystick_node over to a ROS1 based target system (in this example running TurtleSim under ROS1).
-  <img src="doc/ROS2_Joystick-Bridge-ROS1_Turtle.png" height="300px">
+  <img src="doc/ROS2_Joystick-Bridge-ROS1_Turtle.png" width="1100px">

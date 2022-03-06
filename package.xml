@@ -3,7 +3,7 @@
 <package format="3">
   <name>pet_joystick</name>
   <version>0.0.1</version>
-  <description>My first ROS2 package...</description>
+  <description>ROS2 Python Analog-Joystick controller</description>
   <maintainer email="stefan.kull@gmail.com">seniorKullken</maintainer>
   <license>MIT</license>
 

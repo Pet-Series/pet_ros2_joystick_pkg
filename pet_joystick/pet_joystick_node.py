@@ -1,55 +1,63 @@
 #!/usr/bin/env python3'
 # coding = utf-8
 ########################################################################################
-###
-### Maintainer: stefan.kull@gmail.com
-### Inspired by: https://github.com/somervda/ourbotmanager_ros.git
-### 
-### Input: Analog X + Y + Twist(pot.on the stick) from analog joystick
-### Output: micro-ROS node (ROS2) that publish topic /cmd_vel with msg.type twist_stamped
-###    Angular = X-axis = Pull stick Left/Right
-###    Linear  = Y-axis = Pull stick Up/Down
-###    Twist   = Z-axis = Turn/Twist stick  (Not used right now)
-###
-### Behaviour:
-### 1) Once: Read/Set all the parameters
-### 2) Repeatedly: Read analog joystick via ADC
-### 2) Repeatedly: Transform indata to a +/-100% values
-### 3) Repeatedly: Map where the stick are => Depending om location, then adjust behivaiur.
-### 4) Repeatedly: Publish ros-topic
-###
-### Prerequisite:
-### $ sudo apt install i2c-tools
-### $ sudo apt install python3-pip
-### $ sudo pip3 install smbus2
-### $ sudo pip3 install adafruit-ads1x15
-### $ sudo i2cdetect -y 1
-### $ sudo chmod a+rw /dev/i2c-1
-###
-### Hardware: KY-053 Analog Digital Converter (ADS1115, 16-bit) via default I2C adr.=0x48
-### Hardware: Joystick with analog 10K resistors for X, Y and Z
-### Host: Raspberry Pi 4(Ubuntu) via I2C
-###
-### Launch sequence:
-### 1) $ ros2 run pet_mk_viii_joystick joystick_node 
-###
-import rclpy
+##
+## Maintainer: stefan.kull@gmail.com
+## Inspired by: https://github.com/somervda/ourbotmanager_ros.git
+## 
+## Input: Analog X + Y + Twist(pot.on the stick) from analog joystick
+## Output: micro-ROS node (ROS2) that publish topic /cmd_vel with msg.type twist_stamped
+##    Angular = X-axis = Pull stick Left/Right
+##    Linear  = Y-axis = Pull stick Up/Down
+##    Twist   = Z-axis = Turn/Twist stick  (Not used right now)
+##
+## Behaviour:
+## 1) Once: Read/Set all the parameters
+## 2) Repeatedly: Read analog joystick via ADC
+## 3) Repeatedly: Transform indata to a +/-100% values
+## 4) Repeatedly: Map where the stick are => Depending om location, then adjust behivaiur.
+## 5) Repeatedly: Publish ros-topic
+##
+## Prerequisite:
+## $ sudo apt install i2c-tools
+## $ sudo apt install python3-pip
+## $ sudo pip3 install smbus2
+## $ sudo pip3 install adafruit-ads1x15
+## $ sudo i2cdetect -y 1
+## $ sudo chmod a+rw /dev/i2c-1
+##
+## Hardware: KY-053 Analog Digital Converter (ADS1115, 16-bit) via default I2C adr.=0x48
+## Hardware: Joystick with analog 10K resistors for X, Y and Z
+## Host: Raspberry Pi 4(Ubuntu) via I2C
+##
+## Launch sequence:
+## 1) $ ros2 run pet_mk_viii_joystick joystick_node 
+##
+
+# TODO: Naming convetions for the package: "pet_joystick" => "pet_ros2_joystick_pkg"
+# TODO: Get rid of time.sleep() with something more real time/concurrent and ROS2 friendly way of wait...
+
+# Import the ROS2-stuff
+import rclpy  # TODO: IS this line neccesary. Due to the two following lines that importing "Node" and "Parameter"
 from rclpy.node import Node
 from rclpy.parameter import Parameter
+
 from rcl_interfaces.msg import ParameterDescriptor
-from geometry_msgs.msg import Twist
-from geometry_msgs.msg import TwistStamped
-from std_msgs.msg import Header
-from sensor_msgs.msg import Joy
+from geometry_msgs.msg  import Twist
+from geometry_msgs.msg  import TwistStamped
+from std_msgs.msg       import Header
+from sensor_msgs.msg    import Joy
+
+# Import the Ubuntu/Linux-hardware stuff 
 from smbus2 import SMBus
+import Adafruit_ADS1x15
+#from gpiozero import LED
+
+# Import the common Ubuntu/Linux stuff 
 import sys
 import time
 from math import modf
 import signal
-# Import the ADS1x15 module 
-import Adafruit_ADS1x15
-#from gpiozero import LED
-
 
 class JoystickNode(Node): 
     
@@ -61,7 +69,6 @@ class JoystickNode(Node):
     last_value_z = 0.0
 
 
-    
     def __init__(self):
         super().__init__("joystick_node")
         
@@ -306,7 +313,7 @@ def main(args=None):
         rclpy.spin(node)
 
     except KeyboardInterrupt:
-        print("**** ☠️ Ctrl-C detected...")
+        print("**** * 💀 Ctrl-C detected...")
     
     finally:
         print("**** 🪦 joystick_node ending... " + str(sys.exc_info()[1]) )

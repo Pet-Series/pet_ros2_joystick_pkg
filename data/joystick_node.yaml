@@ -15,7 +15,7 @@
     ros_topic_twist_stamped: twist_stamped/cmd_vel
     use_sim_time: false
     x_polarity: -1
-    y_polarity: -1
+    y_polarity: 1
     z_polarity: -1
     zero_range_max: 5
     zero_range_min: -5
