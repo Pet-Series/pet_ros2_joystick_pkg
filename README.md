@@ -18,7 +18,7 @@ Remotely control your robot via cmd_vel topic \
     </tr>
   </table>
 
-## ROS2 Package/Module Behaviour
+# ROS2 Package/Module Behaviour
 1. Once: Read/Set all the parameters
 1. Repeatedly: Read analog joystick via ADC
 1. Repeatedly: Transform indata to a +/-100% values
@@ -38,17 +38,13 @@ flowchart TD
     Publish   --> |Loop|Read_A/D
 ```
 
-## Prerequisite: Hardware
+# Prerequisite: Hardware
 * Single Board Computer(SBC): Raspberry Pi 3/4
 * A/D converter: KY-053 Analog Digital Converter (ADS1115, 16-bit) via default I2C adr.=<code>0x48</code>
-<ul><blockquote>🌐Google tips to find/order A/D-converter from eBay/AliExpress/Wish/Amazon/...  <br></ul>
-1) "KY-053"<br>
-2) "ADS1115 breakout board"
-<table>
 * Joystick: 3x analog 10K resistors. X-, Y- and Twist-axis.
 <ul><blockquote>🌐Google tips to find/order Joystick from eBay/AliExpress/Wish/Amazon/...  <br>
-1) "3-axis analog joy stick"<br>
-2) "XYZ analog joystick"
+1) "3-axis analog joystick"<br>
+2) "XYZ analog joystick"</ul>
 <table>
   <tr>
     <td>
@@ -60,13 +56,13 @@ flowchart TD
   </tr>
 </table>
 
-## Prerequisite: Software
+# Prerequisite: Software
 * Ubuntu 20.04 (64bit) or newer
 * Robot Operating System 2, ROS2 (Version Galathic)
   <blockquote>...do the ROS2-installation stuff...</blockquote>
 
 ## Prerequisite: I2C-interface Raspberry Pi 4 / Ubuntu
-Prepared by adding additional, i2c communication, Linux-software-packages 
+Prepared by adding additional, i2c communication, Linux-software-packages <br/>
 `Ubuntu Shell`
 ```
 ~$ sudo apt install i2c-tools
@@ -104,7 +100,7 @@ Dowload ROS2 package by using 'git clone'
 ~/ws_ros2$ source ./install/setup.bash
 ```
 
-## ROS2 Launch sequence
+# ROS2 Launch sequence
 `Ubuntu Shell`
 ```
 ~/ws_ros2$ ros2 run pet_ros2_joystick_pkg pet_joystick_node
@@ -126,7 +122,8 @@ The <code>pet_joystick_node</code> parallel publishes three variants of topics m
   /twist/cmd_vel
   /twist_stamped/cmd_vel
 ```
-
+<ul><img src="doc/rqt_node_graph-joystick_node.png" height="300px"></ul>
+<br>
 ## ROS2 Parameters used by this package
 Save a "dump" of all the parameters that <code>pet_joystick_node</code> uses.
 `Ubuntu Shell`
@@ -162,9 +159,9 @@ In the following list you can see all the parameters that <code>pet_joystick_nod
 </ul>
 <br>
 
----
+# Test the Jotstick node
 
-## ROS2 Test pet_joystick_node using TurtleSim
+## ROS2 Test pet_joystick_node using TurtleSim (indivudal start)
 Objective is to control the simulated turtle on screen by using <code>pet_joystick_node</code>.
 <ul><blockquote>🤔Most probably have you already the TurtleSim installed as a part of ROS2.<br>
                 ...I will not cover that here!
@@ -201,8 +198,29 @@ One way to do this is set the parameter <code>-p ros_topic_twist:=turtle1/cmd_ve
 
 <br>
 
----
+## ROS2 Launch pet_joystick_node and TurtleSim node via .launch.py file
+The same test case as above - TurtleSim Node + Joystick Node.<br/>
+But this time we launch in one step, via a <code>.launch</code> file.
+
+<code>Ubuntu Shell</code>
+```
+~/ws_ros2$ $ ros2 launch pet_ros2_joystick_pkg turtle_joystick.launch.py 
+  [INFO] [launch]: All log files can be found below /home/ubuntu/.ros/log/2022-03-06-21-16-49-679386-raspikull8-178148
+  [INFO] [launch]: Default logging verbosity is set to INFO
+  [INFO] [turtlesim_node-1]: process started with pid [178150]
+  [INFO] [pet_joystick_node-2]: process started with pid [178152]
+
+  [turtlesim_node-1] [INFO] [1646597810.933757565] [turtlesim]: Starting turtlesim with node name /turtlesim
+  [turtlesim_node-1] [INFO] [1646597810.943631886] [turtlesim]: Spawning turtle [turtle1] at x=[5,544445], y=[5,544445], theta=[0,000000]
+  
+  [pet_joystick_node-2] [INFO] [1646597813.077173940] [joystick_node]: joystick_node has started
+  [pet_joystick_node-2] [INFO] [1646597813.079749163] [joystick_node]: - A/D: 0x48, X-chn: 3, Y-chn: 1, Z-chn: 2
+  [pet_joystick_node-2] [INFO] [1646597813.082246831] [joystick_node]: - A/D sampling: 10.0Hz, Topic: turtle1/cmd_vel
+~/ws_ros2$
+``` 
+<ul><img src="doc/rqt_node_graph-joystick_node+turtlesim_node(.launch_file).png" height="300px"></ul>
+<br>
 
 ## ROS2 Test pet_joystick_node via ROS1_Bridge to TurtleSim on an other PC running ROS1
-If the target system is based on ROS1 (some legasy robot...). Then this is how you bridge the ROS2 based Joystick_node over to a ROS1 based target system (in this example running TurtleSim under ROS1).
-  <img src="doc/ROS2_Joystick-Bridge-ROS1_Turtle.png" width="1100px">
+If the target system is based on ROS1 (some legasy robot...). Then this is how you bridge the ROS2 based Joystick_node over to a ROS1 based target system (in this example running TurtleSim under ROS1).<br>
+<ul><img src="doc/ROS2_Joystick-Bridge-ROS1_Turtle.png" width="1100px"></ul>
