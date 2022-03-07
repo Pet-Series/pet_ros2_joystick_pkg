@@ -49,10 +49,10 @@ flowchart TD
 <table>
   <tr>
     <td>
-      <img src="doc/wiring-pet_ros2_joystick_pkg.png" height="600px">
+      <img src="doc/wiring-pet_ros2_joystick_pkg.png" hight="350px">
     </td>
     <td>
-      <img src="doc/pet_joystick_prototypePhoto1.jpg" height="300px">
+      <img src="doc/pet_joystick_prototypePhoto1.jpg" width="400px">
     </td>
   </tr>
 </table>
