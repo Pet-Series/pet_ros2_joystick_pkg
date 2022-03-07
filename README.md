@@ -45,17 +45,18 @@ flowchart TD
 <ul><blockquote>🌐Google tips to find/order Joystick from eBay/AliExpress/Wish/Amazon/...  <br>
 1) "3-axis analog joystick"<br>
 2) "XYZ analog joystick"</ul>
+<ul>
 <table>
   <tr>
     <td>
-      <img src="doc/pet_joystick_prototypePhoto1.jpg" height="350px">
+      <img src="doc/wiring-pet_ros2_joystick_pkg.png" height="600px">
     </td>
     <td>
-      .
+      <img src="doc/pet_joystick_prototypePhoto1.jpg" height="300px">
     </td>
   </tr>
 </table>
-
+</ul>
 # Prerequisite: Software
 * Ubuntu 20.04 (64bit) or newer
 * Robot Operating System 2, ROS2 (Version Galathic)
