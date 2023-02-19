@@ -12,26 +12,27 @@
 ##    Twist   = Z-axis = Turn/Twist stick  (Not used right now)
 ##
 ## Behaviour:
-## 1) Once: Read/Set all the parameters
-## 2) Repeatedly: Read analog joystick via ADC
-## 3) Repeatedly: Transform indata to a +/-100% values
-## 4) Repeatedly: Map where the stick are => Depending om location, then adjust behivaiur.
-## 5) Repeatedly: Publish ros-topic
+##   1) Once: Read/Set all the parameters
+##   2) Repeatedly: Read analog joystick via ADC
+##   3) Repeatedly: Transform indata to a +/-100% values
+##   4) Repeatedly: Map where the stick are => Depending om location, then adjust behivaiur.
+##   5) Repeatedly: Publish ros-topic
 ##
 ## Prerequisite:
-## $ sudo apt install i2c-tools
-## $ sudo apt install python3-pip
-## $ sudo pip3 install smbus2
-## $ sudo pip3 install adafruit-ads1x15
-## $ sudo i2cdetect -y 1
-## $ sudo chmod a+rw /dev/i2c-1
+##   $ sudo apt install i2c-tools
+##   $ sudo apt install python3-pip
+##   $ sudo pip3 install smbus2
+##   $ sudo pip3 install adafruit-ads1x15
+##   $ sudo i2cdetect -y 1
+##   $ sudo chmod a+rw /dev/i2c-1
 ##
 ## Hardware: KY-053 Analog Digital Converter (ADS1115, 16-bit) via default I2C adr.=0x48
 ## Hardware: Joystick with analog 10K resistors for X, Y and Z
-## Host: Raspberry Pi 4(Ubuntu) via I2C
+## Hardware/SBC: Raspberry Pi 3-4 (Ubuntu or Raspian OS)
 ##
 ## Launch sequence:
-## 1) $ ros2 run pet_mk_viii_joystick joystick_node 
+##   1) $ ros2 run pet_mk_viii_joystick joystick_node 
+##   2) $ ros2 topic echo /raw/joystick 
 ##
 
 # TODO: Naming convetions for the package: "pet_joystick" => "pet_ros2_joystick_pkg"
@@ -60,8 +61,7 @@ from math import modf
 import signal
 
 class JoystickNode(Node): 
-    
-    #rosRunLED = LED(13)
+
     
     # Keep track of last joystick values. Used due to reducing communication of equal values.
     last_value_x = 0.0
